@@ -14,6 +14,8 @@ public class EndemikViewModel extends AndroidViewModel {
 
     private EndemikRepository repository;
     private LiveData<List<Endemik>> allEndemik;
+    private androidx.lifecycle.MutableLiveData<String> searchQuery = new androidx.lifecycle.MutableLiveData<>("");
+    private androidx.lifecycle.MutableLiveData<String> regionFilter = new androidx.lifecycle.MutableLiveData<>("Semua Region");
 
     public EndemikViewModel(@NonNull Application application) {
         super(application);
@@ -34,4 +36,9 @@ public class EndemikViewModel extends AndroidViewModel {
     public void deleteFavorit(String id) { repository.deleteFavorit(id); }
     public LiveData<Integer> isFavorit(String id) { return repository.isFavorit(id); }
     public LiveData<List<Endemik>> getModelFavorit() { return repository.getModelFavorit(); }
+    public void setSearchQuery(String query) { searchQuery.setValue(query); }
+    public LiveData<String> getSearchQuery() { return searchQuery; }
+
+    public void setRegionFilter(String region) { regionFilter.setValue(region); }
+    public LiveData<String> getRegionFilter() { return regionFilter; }
 }

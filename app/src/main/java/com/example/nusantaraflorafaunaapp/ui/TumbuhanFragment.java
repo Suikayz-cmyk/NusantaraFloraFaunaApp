@@ -42,6 +42,16 @@ public class TumbuhanFragment extends Fragment {
             }
         });
 
+        viewModel.getSearchQuery().observe(getViewLifecycleOwner(), query -> {
+            String currentRegion = viewModel.getRegionFilter().getValue();
+            adapter.filter(query, currentRegion);
+        });
+
+        viewModel.getRegionFilter().observe(getViewLifecycleOwner(), region -> {
+            String currentQuery = viewModel.getSearchQuery().getValue();
+            adapter.filter(currentQuery, region);
+        });
+
         return rvEndemik;
     }
 }

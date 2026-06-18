@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">NusantaraFloraFaunaApp</string>
+
+    <string-array name="region_array">
+        <item>Semua Region</item>
+        <item>Sumatera</item>
+        <item>Jawa</item>
+        <item>Kalimantan</item>
+        <item>Sulawesi</item>
+        <item>Papua</item>
+        <item>Nusa Tenggara</item>
+        <item>Maluku</item>
+    </string-array>
 </resources>

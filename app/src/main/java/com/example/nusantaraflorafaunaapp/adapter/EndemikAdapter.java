@@ -20,16 +20,17 @@ import java.util.List;
 public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikViewHolder> {
 
     private Context context;
-    private List<Endemik> endemikList = new ArrayList<>();
+    private List<Endemik> originalList = new ArrayList<>();
+    private List<Endemik> filteredList = new ArrayList<>();
 
     public EndemikAdapter(Context context) {
         this.context = context;
     }
 
-    // Method untuk memperbarui data dari MainActivity nanti
     public void setEndemikList(List<Endemik> list) {
-        this.endemikList = list;
-        notifyDataSetChanged(); // Memberitahu adapter bahwa data berubah
+        this.originalList = list;
+        this.filteredList = new ArrayList<>(list); // Copy data asli ke filtered
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,9 +40,33 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
         return new EndemikViewHolder(view);
     }
 
+    public void filter(String query, String region) {
+        filteredList.clear();
+        String safeQuery = query != null ? query.toLowerCase() : "";
+        String safeRegion = region != null ? region.toLowerCase() : "semua region";
+
+        if (safeQuery.isEmpty() && safeRegion.equals("semua region")) {
+            filteredList.addAll(originalList);
+        } else {
+            for (Endemik item : originalList) {
+                boolean matchQuery = item.getNama().toLowerCase().contains(safeQuery) ||
+                        item.getNama_latin().toLowerCase().contains(safeQuery);
+
+                boolean matchRegion = safeRegion.equals("semua region") ||
+                        (item.getAsal() != null && item.getAsal().toLowerCase().contains(safeRegion)) ||
+                        (item.getSebaran() != null && item.getSebaran().toLowerCase().contains(safeRegion));
+
+                if (matchQuery && matchRegion) {
+                    filteredList.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull EndemikViewHolder holder, int position) {
-        Endemik endemik = endemikList.get(position);
+        Endemik endemik = filteredList.get(position);
 
         holder.tvNama.setText(endemik.getNama());
         holder.tvNamaLatin.setText(endemik.getNama_latin());
@@ -76,7 +101,7 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
 
     @Override
     public int getItemCount() {
-        return endemikList.size();
+        return filteredList.size();
     }
 
     // ViewHolder: Berfungsi mencari dan menyimpan referensi komponen UI

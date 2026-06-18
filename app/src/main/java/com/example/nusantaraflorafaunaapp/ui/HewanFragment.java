@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nusantaraflorafaunaapp.R;
 import com.example.nusantaraflorafaunaapp.adapter.EndemikAdapter;
 import com.example.nusantaraflorafaunaapp.viewmodel.EndemikViewModel;
 
@@ -24,7 +23,6 @@ public class HewanFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Karena kita belum buat fragment_hewan.xml khusus, kita pinjam struktur RecyclerView sederhana
         RecyclerView rvEndemik = new RecyclerView(requireContext());
         rvEndemik.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -35,14 +33,29 @@ public class HewanFragment extends Fragment {
         adapter = new EndemikAdapter(requireContext());
         rvEndemik.setAdapter(adapter);
 
-        // Gunakan requireActivity() agar ViewModel tidak ter-reset
         viewModel = new ViewModelProvider(requireActivity()).get(EndemikViewModel.class);
 
-        // Nanti di Phase selanjutnya kita ubah ini agar hanya filter "Hewan"
-        viewModel.getAllEndemik().observe(getViewLifecycleOwner(), endemikList -> {
+        // Mengambil data KHUSUS HEWAN
+        viewModel.getEndemikByTipe("Hewan").observe(getViewLifecycleOwner(), endemikList -> {
             if (endemikList != null) {
                 adapter.setEndemikList(endemikList);
+
+                // Menerapkan filter saat data pertama kali dimuat
+                String currentQuery = viewModel.getSearchQuery().getValue();
+                String currentRegion = viewModel.getRegionFilter().getValue();
+                adapter.filter(currentQuery, currentRegion);
             }
+        });
+
+        // Observers untuk Search dan Filter
+        viewModel.getSearchQuery().observe(getViewLifecycleOwner(), query -> {
+            String currentRegion = viewModel.getRegionFilter().getValue();
+            adapter.filter(query, currentRegion);
+        });
+
+        viewModel.getRegionFilter().observe(getViewLifecycleOwner(), region -> {
+            String currentQuery = viewModel.getSearchQuery().getValue();
+            adapter.filter(currentQuery, region);
         });
 
         return rvEndemik;
