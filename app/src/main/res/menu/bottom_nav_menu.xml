@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_hewan"
+        android:icon="@drawable/ic_hewan"
+        android:title="Hewan" />
+    <item
+        android:id="@+id/nav_tumbuhan"
+        android:icon="@drawable/ic_tumbuhan"
+        android:title="Tumbuhan" />
+    <item
+        android:id="@+id/nav_favorit"
+        android:icon="@drawable/ic_favorit"
+        android:title="Favorit" />
+    <item
+        android:id="@+id/nav_akun"
+        android:icon="@drawable/ic_akun"
+        android:title="Akun" />
+</menu>

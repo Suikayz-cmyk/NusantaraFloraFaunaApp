@@ -22,7 +22,7 @@
             android:layout_height="48dp"
             android:layout_gravity="end"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/baseline_favorite_24"
+            android:src="@drawable/ic_favorit"
             android:contentDescription="Tombol Favorit" />
 
         <LinearLayout

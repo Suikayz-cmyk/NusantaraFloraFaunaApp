@@ -1,41 +1,51 @@
 package com.example.nusantaraflorafaunaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
-import com.example.nusantaraflorafaunaapp.adapter.EndemikAdapter;
-import com.example.nusantaraflorafaunaapp.viewmodel.EndemikViewModel;
+import com.example.nusantaraflorafaunaapp.ui.AkunFragment;
+import com.example.nusantaraflorafaunaapp.ui.FavoritFragment;
+import com.example.nusantaraflorafaunaapp.ui.HewanFragment;
+import com.example.nusantaraflorafaunaapp.ui.TumbuhanFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private EndemikViewModel viewModel;
-    private EndemikAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1. Setup RecyclerView & Adapter
-        RecyclerView rvEndemik = findViewById(R.id.rvEndemik);
-        rvEndemik.setLayoutManager(new LinearLayoutManager(this));
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
-        adapter = new EndemikAdapter(this);
-        rvEndemik.setAdapter(adapter);
+        bottomNav.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
 
-        // 2. Inisialisasi ViewModel
-        viewModel = new ViewModelProvider(this).get(EndemikViewModel.class);
-
-        // 3. Observe Data (Mengamati perubahan data dari Room)
-        viewModel.getAllEndemik().observe(this, endemikList -> {
-            if (endemikList != null) {
-                // Jika ada data, masukkan ke adapter untuk ditampilkan
-                adapter.setEndemikList(endemikList);
+            if (itemId == R.id.nav_hewan) {
+                selectedFragment = new HewanFragment();
+            } else if (itemId == R.id.nav_tumbuhan) {
+                selectedFragment = new TumbuhanFragment();
+            } else if (itemId == R.id.nav_favorit) {
+                selectedFragment = new FavoritFragment();
+            } else if (itemId == R.id.nav_akun) {
+                selectedFragment = new AkunFragment();
             }
+
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
+            }
+            return true;
         });
+
+        // Tampilkan fragment Hewan saat aplikasi pertama kali dibuka
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HewanFragment())
+                    .commit();
+        }
     }
 }
