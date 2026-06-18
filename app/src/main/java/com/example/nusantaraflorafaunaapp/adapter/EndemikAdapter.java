@@ -47,13 +47,30 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
         holder.tvNamaLatin.setText(endemik.getNama_latin());
         holder.tvTipe.setText(endemik.getTipe());
 
-        // Menggunakan Glide untuk memuat gambar dari URL
         if (endemik.getFoto() != null && !endemik.getFoto().isEmpty()) {
             Glide.with(context)
                     .load(endemik.getFoto())
-                    .placeholder(android.R.drawable.ic_menu_gallery) // Gambar sementara saat loading
+                    .placeholder(android.R.drawable.ic_menu_gallery)
                     .into(holder.ivFoto);
         }
+
+        // TAMBAHKAN KODE INI: Aksi ketika satu item (baris) diklik
+        holder.itemView.setOnClickListener(v -> {
+            // Intent untuk berpindah dari halaman saat ini ke DetailActivity
+            android.content.Intent intent = new android.content.Intent(context, com.example.nusantaraflorafaunaapp.DetailActivity.class);
+
+            // Membawa bekal data ke halaman detail
+            intent.putExtra("EXTRA_FOTO", endemik.getFoto());
+            intent.putExtra("EXTRA_TIPE", endemik.getTipe());
+            intent.putExtra("EXTRA_NAMA", endemik.getNama());
+            intent.putExtra("EXTRA_NAMA_LATIN", endemik.getNama_latin());
+            intent.putExtra("EXTRA_STATUS", endemik.getStatus());
+            intent.putExtra("EXTRA_ASAL", endemik.getAsal());
+            intent.putExtra("EXTRA_SEBARAN", endemik.getSebaran());
+            intent.putExtra("EXTRA_DESKRIPSI", endemik.getDeskripsi());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override
