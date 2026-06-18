@@ -47,35 +47,38 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(android.widget.AdapterView<?> parent) {}
         });
 
+        // Setup Navigasi Bawah (Hanya Hewan & Tumbuhan)
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
-            int itemId = item.getItemId();
-
-            if (itemId == R.id.nav_hewan) {
+            if (item.getItemId() == R.id.nav_hewan) {
                 selectedFragment = new HewanFragment();
-            } else if (itemId == R.id.nav_tumbuhan) {
+            } else if (item.getItemId() == R.id.nav_tumbuhan) {
                 selectedFragment = new TumbuhanFragment();
-            } else if (itemId == R.id.nav_favorit) {
-                selectedFragment = new FavoritFragment();
-            } else if (itemId == R.id.nav_akun) {
-                selectedFragment = new AkunFragment();
             }
 
             if (selectedFragment != null) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment)
-                        .commit();
+                        .replace(R.id.fragment_container, selectedFragment).commit();
             }
             return true;
         });
 
-        // Tampilkan fragment Hewan saat aplikasi pertama kali dibuka
+        // Setup Navigasi Tombol Atas (Favorit & Akun)
+        findViewById(R.id.btnHeaderFavorit).setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new FavoritFragment()).commit();
+        });
+
+        findViewById(R.id.btnHeaderAkun).setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new AkunFragment()).commit();
+        });
+
+        // Tampilkan default fragment (Hewan)
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new HewanFragment())
-                    .commit();
+                    .replace(R.id.fragment_container, new HewanFragment()).commit();
         }
     }
 }

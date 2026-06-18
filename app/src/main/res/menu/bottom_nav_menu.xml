@@ -8,12 +8,4 @@
         android:id="@+id/nav_tumbuhan"
         android:icon="@drawable/ic_tumbuhan"
         android:title="Tumbuhan" />
-    <item
-        android:id="@+id/nav_favorit"
-        android:icon="@drawable/ic_favorit"
-        android:title="Favorit" />
-    <item
-        android:id="@+id/nav_akun"
-        android:icon="@drawable/ic_akun"
-        android:title="Akun" />
 </menu>
