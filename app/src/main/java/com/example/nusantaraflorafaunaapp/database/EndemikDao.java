@@ -19,4 +19,19 @@ public interface EndemikDao {
 
     @Query("SELECT * FROM tabel_endemik WHERE tipe = :tipe")
     LiveData<List<Endemik>> getEndemikByTipe(String tipe);
+
+    // FITUR FAVORIT
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertFavorit(Favorit favorit);
+
+    @Query("DELETE FROM tabel_favorit WHERE endemikId = :id")
+    void deleteFavorit(String id);
+
+    // Cek apakah item ini sudah difavoritkan (kembalikan > 0 jika iya)
+    @Query("SELECT COUNT(*) FROM tabel_favorit WHERE endemikId = :id")
+    LiveData<Integer> isFavorit(String id);
+
+    // Ambil data lengkap Endemik yang ID-nya ada di tabel_favorit
+    @Query("SELECT * FROM tabel_endemik WHERE id IN (SELECT endemikId FROM tabel_favorit) ORDER BY nama ASC")
+    LiveData<List<Endemik>> getModelFavorit();
 }

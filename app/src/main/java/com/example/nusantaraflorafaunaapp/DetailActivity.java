@@ -2,6 +2,7 @@ package com.example.nusantaraflorafaunaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,5 +51,32 @@ public class DetailActivity extends AppCompatActivity {
                     .placeholder(android.R.drawable.ic_menu_gallery)
                     .into(ivFoto);
         }
+
+        String id = getIntent().getStringExtra("EXTRA_ID"); // Pastikan di Adapter kamu juga mem-pass "id" melalui Intent!
+        ImageButton btnFavorit = findViewById(R.id.btnFavorit);
+
+        com.example.nusantaraflorafaunaapp.viewmodel.EndemikViewModel viewModel =
+                new androidx.lifecycle.ViewModelProvider(this).get(com.example.nusantaraflorafaunaapp.viewmodel.EndemikViewModel.class);
+
+        final boolean[] isFav = {false};
+
+        viewModel.isFavorit(id).observe(this, count -> {
+            if (count != null && count > 0) {
+                isFav[0] = true;
+                btnFavorit.setImageResource(android.R.drawable.btn_star_big_on); // Icon aktif
+            } else {
+                isFav[0] = false;
+                btnFavorit.setImageResource(android.R.drawable.btn_star_big_off); // Icon mati
+            }
+        });
+
+        btnFavorit.setOnClickListener(v -> {
+            if (isFav[0]) {
+                viewModel.deleteFavorit(id);
+            } else {
+                viewModel.insertFavorit(id);
+            }
+        });
+
     }
 }

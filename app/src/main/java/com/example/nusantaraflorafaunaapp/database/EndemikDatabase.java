@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Endemik.class}, version = 1, exportSchema = false)
+@Database(entities = {Endemik.class, Favorit.class}, version = 2, exportSchema = false)
 public abstract class EndemikDatabase extends RoomDatabase {
 
     private static volatile EndemikDatabase INSTANCE;

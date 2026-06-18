@@ -29,4 +29,9 @@ public class EndemikViewModel extends AndroidViewModel {
     public LiveData<List<Endemik>> getEndemikByTipe(String tipe) {
         return repository.getEndemikByTipe(tipe);
     }
+
+    public void insertFavorit(String id) { repository.insertFavorit(id); }
+    public void deleteFavorit(String id) { repository.deleteFavorit(id); }
+    public LiveData<Integer> isFavorit(String id) { return repository.isFavorit(id); }
+    public LiveData<List<Endemik>> getModelFavorit() { return repository.getModelFavorit(); }
 }

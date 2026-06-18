@@ -68,6 +68,7 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
             intent.putExtra("EXTRA_ASAL", endemik.getAsal());
             intent.putExtra("EXTRA_SEBARAN", endemik.getSebaran());
             intent.putExtra("EXTRA_DESKRIPSI", endemik.getDeskripsi());
+            intent.putExtra("EXTRA_ID", endemik.getId());
 
             context.startActivity(intent);
         });
