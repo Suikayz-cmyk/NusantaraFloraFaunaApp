@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,11 +30,20 @@ public class TumbuhanFragment extends Fragment {
         rvEndemik.setPadding(0, 16, 0, 16);
         rvEndemik.setClipToPadding(false);
 
-        rvEndemik.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new EndemikAdapter(requireContext());
         rvEndemik.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(requireActivity()).get(EndemikViewModel.class);
+
+        viewModel.getIsGridView().observe(getViewLifecycleOwner(), isGrid -> {
+            adapter.setGridMode(isGrid);
+
+            if (isGrid) {
+                rvEndemik.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+            } else {
+                rvEndemik.setLayoutManager(new LinearLayoutManager(requireContext()));
+            }
+        });
 
         // Mengambil data khusus Tumbuhan
         viewModel.getEndemikByTipe("Tumbuhan").observe(getViewLifecycleOwner(), endemikList -> {

@@ -4,6 +4,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.nusantaraflorafaunaapp.database.Endemik;
 import com.example.nusantaraflorafaunaapp.repository.EndemikRepository;
@@ -17,6 +18,8 @@ public class EndemikViewModel extends AndroidViewModel {
     private androidx.lifecycle.MutableLiveData<String> searchQuery = new androidx.lifecycle.MutableLiveData<>("");
     private androidx.lifecycle.MutableLiveData<String> regionFilter = new androidx.lifecycle.MutableLiveData<>("Semua Region");
 
+    private final MutableLiveData<String> pageTitle = new MutableLiveData<>("List Hewan : Semua Region");
+    private final MutableLiveData<Boolean> isViewToggleVisible = new MutableLiveData<>(true);
     public EndemikViewModel(@NonNull Application application) {
         super(application);
         repository = new EndemikRepository(application);
@@ -27,6 +30,12 @@ public class EndemikViewModel extends AndroidViewModel {
     public LiveData<List<Endemik>> getAllEndemik() {
         return allEndemik;
     }
+
+    public LiveData<String> getPageTitle() { return pageTitle; }
+    public void setPageTitle(String title) { pageTitle.setValue(title); }
+
+    public LiveData<Boolean> getIsViewToggleVisible() { return isViewToggleVisible; }
+    public void setViewToggleVisible(boolean visible) { isViewToggleVisible.setValue(visible); }
 
     public LiveData<List<Endemik>> getEndemikByTipe(String tipe) {
         return repository.getEndemikByTipe(tipe);
@@ -41,4 +50,16 @@ public class EndemikViewModel extends AndroidViewModel {
 
     public void setRegionFilter(String region) { regionFilter.setValue(region); }
     public LiveData<String> getRegionFilter() { return regionFilter; }
+
+    private final MutableLiveData<Boolean> isGridView = new MutableLiveData<>(true);
+
+    public LiveData<Boolean> getIsGridView() {
+        return isGridView;
+    }
+
+    public void toggleGridView() {
+        if (isGridView.getValue() != null) {
+            isGridView.setValue(!isGridView.getValue());
+        }
+    }
 }

@@ -23,6 +23,9 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvAsal = findViewById(R.id.tvDetailAsal);
         TextView tvDeskripsi = findViewById(R.id.tvDetailDeskripsi);
 
+        ImageButton btnBackDetail = findViewById(R.id.btnBackDetail);
+        btnBackDetail.setOnClickListener(v -> finish());
+
         // Menangkap data dari Intent
         String foto = getIntent().getStringExtra("EXTRA_FOTO");
         String tipe = getIntent().getStringExtra("EXTRA_TIPE");
@@ -52,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
                     .into(ivFoto);
         }
 
-        String id = getIntent().getStringExtra("EXTRA_ID"); // Pastikan di Adapter kamu juga mem-pass "id" melalui Intent!
+        String id = getIntent().getStringExtra("EXTRA_ID");
         ImageButton btnFavorit = findViewById(R.id.btnFavorit);
 
         com.example.nusantaraflorafaunaapp.viewmodel.EndemikViewModel viewModel =
@@ -63,10 +66,12 @@ public class DetailActivity extends AppCompatActivity {
         viewModel.isFavorit(id).observe(this, count -> {
             if (count != null && count > 0) {
                 isFav[0] = true;
-                btnFavorit.setImageResource(android.R.drawable.btn_star_big_on); // Icon aktif
+                // UBAH DI SINI: Gunakan ikon love terisi dari folder drawable-mu
+                btnFavorit.setImageResource(R.drawable.ic_favorit);
             } else {
                 isFav[0] = false;
-                btnFavorit.setImageResource(android.R.drawable.btn_star_big_off); // Icon mati
+                // UBAH DI SINI: Gunakan ikon love outline dari folder drawable-mu
+                btnFavorit.setImageResource(R.drawable.ic_love_outline);
             }
         });
 

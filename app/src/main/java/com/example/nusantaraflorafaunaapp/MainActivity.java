@@ -1,59 +1,97 @@
 package com.example.nusantaraflorafaunaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.nusantaraflorafaunaapp.ui.AkunFragment;
 import com.example.nusantaraflorafaunaapp.ui.FavoritFragment;
 import com.example.nusantaraflorafaunaapp.ui.HewanFragment;
+import com.example.nusantaraflorafaunaapp.ui.SearchFragment;
 import com.example.nusantaraflorafaunaapp.ui.TumbuhanFragment;
 import com.example.nusantaraflorafaunaapp.viewmodel.EndemikViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EndemikViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EndemikViewModel viewModel = new androidx.lifecycle.ViewModelProvider(this).get(EndemikViewModel.class);
+        viewModel = new ViewModelProvider(this).get(EndemikViewModel.class);
 
-        androidx.appcompat.widget.SearchView searchView = findViewById(R.id.searchView);
-        android.widget.Spinner spinnerRegion = findViewById(R.id.spinnerRegion);
+        TextView tvPageTitle = findViewById(R.id.tvPageTitle);
+        ImageButton btnThemeToggle = findViewById(R.id.btnThemeToggle);
+        ImageButton btnViewToggle = findViewById(R.id.btnViewToggle);
 
-        // Listener untuk Search
-        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) { return false; }
+        // --- OBSERVER UNTUK HEADER ---
+        // 1. Update teks judul otomatis
+        viewModel.getPageTitle().observe(this, title -> tvPageTitle.setText(title));
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                viewModel.setSearchQuery(newText); // Kirim kata kunci ke ViewModel
-                return true;
-            }
+        // 2. Sembunyikan/Tampilkan tombol Grid
+        viewModel.getIsViewToggleVisible().observe(this, visible -> {
+            btnViewToggle.setVisibility(visible ? View.VISIBLE : View.GONE);
         });
 
-        // Listener untuk Filter Region
-        spinnerRegion.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
-                String region = parent.getItemAtPosition(position).toString();
-                viewModel.setRegionFilter(region); // Kirim region ke ViewModel
-            }
+        // --- THEME TOGGLE (HEADER) ---
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isNightMode = currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+        btnThemeToggle.setImageResource(isNightMode ? R.drawable.ic_sun : R.drawable.ic_moon);
 
-            @Override
-            public void onNothingSelected(android.widget.AdapterView<?> parent) {}
+        btnThemeToggle.setOnClickListener(v -> {
+            AppCompatDelegate.setDefaultNightMode(isNightMode ?
+                    AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES);
         });
 
-        // Setup Navigasi Bawah (Hanya Hewan & Tumbuhan)
+        // --- VIEW TOGGLE (GRID/LIST) ---
+        viewModel.getIsGridView().observe(this, isGrid -> {
+            btnViewToggle.setImageResource(isGrid ? R.drawable.ic_list : R.drawable.ic_grid);
+        });
+        btnViewToggle.setOnClickListener(v -> viewModel.toggleGridView());
+
+        // --- NAVIGASI KLIK ---
+        findViewById(R.id.btnSearchHeader).setOnClickListener(v -> {
+            tvPageTitle.setText("Pencarian Spesies");
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new SearchFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        findViewById(R.id.btnFavHeader).setOnClickListener(v -> {
+            viewModel.setPageTitle("Favorit Tersimpan");
+            viewModel.setViewToggleVisible(true); // Tampilkan toggle grid
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new FavoritFragment()).commit();
+        });
+
+        findViewById(R.id.btnAkunHeader).setOnClickListener(v -> {
+            viewModel.setPageTitle("Informasi Akun");
+            viewModel.setViewToggleVisible(false); // Sembunyikan toggle grid
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new AkunFragment()).commit();
+        });
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             if (item.getItemId() == R.id.nav_hewan) {
+                viewModel.setPageTitle("List Hewan : Semua Region");
+                viewModel.setViewToggleVisible(true);
                 selectedFragment = new HewanFragment();
             } else if (item.getItemId() == R.id.nav_tumbuhan) {
+                viewModel.setPageTitle("List Tumbuhan : Semua Region");
+                viewModel.setViewToggleVisible(true);
                 selectedFragment = new TumbuhanFragment();
             }
 
@@ -64,19 +102,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // Setup Navigasi Tombol Atas (Favorit & Akun)
-        findViewById(R.id.btnHeaderFavorit).setOnClickListener(v -> {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new FavoritFragment()).commit();
-        });
-
-        findViewById(R.id.btnHeaderAkun).setOnClickListener(v -> {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new AkunFragment()).commit();
-        });
-
-        // Tampilkan default fragment (Hewan)
+        // Tampilkan default HANYA saat aplikasi pertama kali dibuka (bukan saat ganti tema)
         if (savedInstanceState == null) {
+            viewModel.setPageTitle("List Hewan : Semua Region");
+            viewModel.setViewToggleVisible(true);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HewanFragment()).commit();
         }

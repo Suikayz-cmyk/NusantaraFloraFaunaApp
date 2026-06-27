@@ -1,102 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Tambahkan fitsSystemWindows="true" di sini agar tidak tertabrak status bar -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="?android:attr/windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/ivDetailFoto"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:background="#E0E0E0" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?android:attr/windowBackground"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp">
 
         <ImageButton
-            android:id="@+id/btnFavorit"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end"
+            android:id="@+id/btnBackDetail"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_favorit"
-            android:contentDescription="Tombol Favorit" />
+            android:src="@drawable/ic_arrow_back"
+            app:tint="?attr/colorControlNormal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Detail Spesies"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/windowBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvDetailTipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
-                android:text="Tipe"
-                android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/ivDetailFoto"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:background="#E0E0E0" />
 
-            <TextView
-                android:id="@+id/tvDetailNama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Nama"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <ImageButton
+                android:id="@+id/btnFavorit"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_love_outline" app:tint="?attr/colorControlNormal"
+                android:contentDescription="Tombol Favorit" />
 
-            <TextView
-                android:id="@+id/tvDetailNamaLatin"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama Latin"
-                android:textSize="16sp"
-                android:textStyle="italic" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Status Konservasi:"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tvDetailStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Status" />
+                <!-- Ubah background dan text color agar seragam dengan Card View -->
+                <TextView
+                    android:id="@+id/tvDetailTipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#33888888"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="Tipe"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Asal / Sebaran:"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tvDetailAsal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Asal dan sebaran..." />
+                <TextView
+                    android:id="@+id/tvDetailNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Nama"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Deskripsi:"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tvDetailDeskripsi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Deskripsi panjang akan muncul di sini..."
-                android:lineSpacingExtra="4dp"/>
+                <TextView
+                    android:id="@+id/tvDetailNamaLatin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Latin"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="italic" />
 
+                <!-- Tambahkan textColorPrimary untuk semua Label/Judul bagian -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Status Konservasi:"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold" />
+
+                <!-- Tambahkan textColorSecondary untuk isi dari teks tersebut -->
+                <TextView
+                    android:id="@+id/tvDetailStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:text="Status" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Asal / Sebaran:"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDetailAsal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:text="Asal dan sebaran..." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Deskripsi:"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDetailDeskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Deskripsi panjang akan muncul di sini..."
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:lineSpacingExtra="4dp"/>
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

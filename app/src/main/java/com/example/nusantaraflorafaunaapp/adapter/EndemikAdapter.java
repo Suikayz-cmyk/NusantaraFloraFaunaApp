@@ -23,6 +23,10 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
     private List<Endemik> originalList = new ArrayList<>();
     private List<Endemik> filteredList = new ArrayList<>();
 
+    private boolean isGridMode = false;
+    private static final int VIEW_TYPE_LIST = 0;
+    private static final int VIEW_TYPE_GRID = 1;
+
     public EndemikAdapter(Context context) {
         this.context = context;
     }
@@ -32,11 +36,28 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
         this.filteredList = new ArrayList<>(list); // Copy data asli ke filtered
         notifyDataSetChanged();
     }
+    public void setGridMode(boolean isGrid) {
+        this.isGridMode = isGrid;
+        notifyDataSetChanged(); // Wajib dipanggil agar layout di-render ulang!
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return isGridMode ? VIEW_TYPE_GRID : VIEW_TYPE_LIST;
+    }
 
     @NonNull
     @Override
     public EndemikViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_endemik, parent, false);
+        // Cek viewType untuk menentukan layout mana yang akan di-inflate
+        int layoutId;
+        if (viewType == VIEW_TYPE_GRID) {
+            layoutId = R.layout.item_endemik_grid; // Layout untuk Grid
+        } else {
+            layoutId = R.layout.item_endemik; // Layout untuk List
+        }
+
+        View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
         return new EndemikViewHolder(view);
     }
 
