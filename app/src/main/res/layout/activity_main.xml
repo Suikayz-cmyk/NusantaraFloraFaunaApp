@@ -64,14 +64,23 @@
         android:background="@color/colorSubHeader">
 
         <TextView
-        android:id="@+id/tvPageTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="List Hewan : Semua Region"
-        android:textColor="?android:attr/textColorSecondary"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+            android:id="@+id/tvPageTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="List Hewan : Semua Region"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnLangToggle"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_language"
+            app:tint="?attr/colorControlNormal" />
 
         <ImageButton
             android:id="@+id/btnThemeToggle"

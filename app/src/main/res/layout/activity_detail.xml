@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="16dp"
-            android:text="Detail Spesies"
+            android:text="@string/nav_detail"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -69,17 +69,6 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tvDetailTipe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#33888888"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:text="Tipe"
-                    android:textSize="14sp" />
-
-                <TextView
                     android:id="@+id/tvDetailNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -102,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Status Konservasi:"
+                    android:text="@string/detail_Status"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold" />
 
@@ -111,13 +100,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:text="Status" />
+                    android:text="@string/detail_Status" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Asal / Sebaran:"
+                    android:text="@string/detail_asal"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold" />
 
@@ -126,13 +115,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:text="Asal dan sebaran..." />
+                    android:text="@string/detail_asal" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Deskripsi:"
+                    android:text="@string/detail_deskripsi"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold" />
 

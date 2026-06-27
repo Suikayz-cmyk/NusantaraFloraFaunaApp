@@ -3,9 +3,9 @@
     <item
         android:id="@+id/nav_hewan"
         android:icon="@drawable/ic_hewan"
-        android:title="Hewan" />
+        android:title="@string/nav_hewan" />
     <item
         android:id="@+id/nav_tumbuhan"
         android:icon="@drawable/ic_tumbuhan"
-        android:title="Tumbuhan" />
+        android:title="@string/nav_tumbuhan" />
 </menu>

@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">NusantaraFloraFaunaApp</string>
 
+    <string name="title_hewan">List Hewan : Semua Region</string>
+    <string name="title_tumbuhan">List Tumbuhan : Semua Region</string>
+    <string name="title_favorit">Favorit Tersimpan</string>
+    <string name="title_akun">Informasi Akun</string>
+    <string name="title_search">Pencarian Spesies</string>
+    <string name="nav_hewan">Hewan</string>
+    <string name="nav_tumbuhan">Tumbuhan</string>
+    <string name="filter_wilayah">Filter Wilayah : </string>
+    <string name="query_hint">Cari Flaura/Fauna</string>
+    <string name="nav_detail">Detail Spesies</string>
+    <string name="detail_Status">Status Konservasi : </string>
+    <string name="detail_asal">Asal / Sebaran : </string>
+    <string name="detail_deskripsi">Deskripsi : </string>
+
     <string-array name="region_array">
         <item>Semua Region</item>
         <item>Sumatera</item>

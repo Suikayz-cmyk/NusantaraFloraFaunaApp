@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">NusantaraFloraFaunaApp</string>
+
+    <string name="title_hewan">Animal List : All Regions</string>
+    <string name="title_tumbuhan">Plant List : All Regions</string>
+    <string name="title_favorit">Saved Favorites</string>
+    <string name="title_akun">Account Info</string>
+    <string name="title_search">Species Search</string>
+    <string name="nav_hewan">Animals</string>
+    <string name="nav_tumbuhan">Plants</string>
+    <string name="filter_wilayah">Area Filters : </string>
+    <string name="query_hint">Search for flora/fauna</string>
+    <string name="nav_detail">Species Details</string>
+    <string name="detail_Status">Conservation Status : </string>
+    <string name="detail_asal">Origin / Distribution : </string>
+    <string name="detail_deskripsi">Description : </string>
+
+    <string-array name="region_array">
+        <item>All Regions</item>
+        <item>Sumatra</item>
+        <item>Java</item>
+        <item>Kalimantan</item>
+        <item>Sulawesi</item>
+        <item>Papua</item>
+        <item>Nusa Tenggara</item>
+        <item>Maluku</item>
+    </string-array>
+</resources>

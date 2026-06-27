@@ -16,7 +16,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         ImageView ivFoto = findViewById(R.id.ivDetailFoto);
-        TextView tvTipe = findViewById(R.id.tvDetailTipe);
         TextView tvNama = findViewById(R.id.tvDetailNama);
         TextView tvNamaLatin = findViewById(R.id.tvDetailNamaLatin);
         TextView tvStatus = findViewById(R.id.tvDetailStatus);
@@ -37,7 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         String deskripsi = getIntent().getStringExtra("EXTRA_DESKRIPSI");
 
         // Menampilkan data ke UI
-        tvTipe.setText(tipe);
         tvNama.setText(nama);
         tvNamaLatin.setText(namaLatin);
         tvStatus.setText(status != null && !status.isEmpty() ? status : "Tidak ada informasi");

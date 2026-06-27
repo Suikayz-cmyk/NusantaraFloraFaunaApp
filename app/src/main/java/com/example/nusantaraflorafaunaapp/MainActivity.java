@@ -2,6 +2,7 @@ package com.example.nusantaraflorafaunaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat; // <-- IMPORT INI UNTUK BAHASA
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.res.Configuration;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         ImageButton btnThemeToggle = findViewById(R.id.btnThemeToggle);
         ImageButton btnViewToggle = findViewById(R.id.btnViewToggle);
 
+        // --- INISIALISASI TOMBOL BAHASA ---
+        ImageButton btnLangToggle = findViewById(R.id.btnLangToggle);
+
         // --- OBSERVER UNTUK HEADER ---
         // 1. Update teks judul otomatis
         viewModel.getPageTitle().observe(this, title -> tvPageTitle.setText(title));
@@ -58,9 +62,21 @@ public class MainActivity extends AppCompatActivity {
         });
         btnViewToggle.setOnClickListener(v -> viewModel.toggleGridView());
 
+        // --- LANGUAGE TOGGLE (GANTI BAHASA) ---
+        btnLangToggle.setOnClickListener(v -> {
+            LocaleListCompat currentLocale = AppCompatDelegate.getApplicationLocales();
+            // Cek jika bahasa saat ini Inggris, ubah ke Indonesia (id), jika tidak ubah ke Inggris (en)
+            if (currentLocale.toLanguageTags().equals("en")) {
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("id"));
+            } else {
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"));
+            }
+        });
+
         // --- NAVIGASI KLIK ---
         findViewById(R.id.btnSearchHeader).setOnClickListener(v -> {
-            tvPageTitle.setText("Pencarian Spesies");
+            // Gunakan getString agar bisa menyesuaikan bahasa
+            tvPageTitle.setText(getString(R.string.title_search));
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new SearchFragment())
@@ -69,28 +85,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnFavHeader).setOnClickListener(v -> {
-            viewModel.setPageTitle("Favorit Tersimpan");
-            viewModel.setViewToggleVisible(true); // Tampilkan toggle grid
+            viewModel.setPageTitle(getString(R.string.title_favorit)); // Sesuaikan bahasa
+            viewModel.setViewToggleVisible(true);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new FavoritFragment()).commit();
         });
 
         findViewById(R.id.btnAkunHeader).setOnClickListener(v -> {
-            viewModel.setPageTitle("Informasi Akun");
-            viewModel.setViewToggleVisible(false); // Sembunyikan toggle grid
+            viewModel.setPageTitle(getString(R.string.title_akun)); // Sesuaikan bahasa
+            viewModel.setViewToggleVisible(false);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new AkunFragment()).commit();
         });
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        int selectedItemId = bottomNav.getSelectedItemId();
+        if (selectedItemId == R.id.nav_hewan) {
+            viewModel.setPageTitle(getString(R.string.title_hewan));
+        } else if (selectedItemId == R.id.nav_tumbuhan) {
+            viewModel.setPageTitle(getString(R.string.title_tumbuhan));
+        }
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             if (item.getItemId() == R.id.nav_hewan) {
-                viewModel.setPageTitle("List Hewan : Semua Region");
+                viewModel.setPageTitle(getString(R.string.title_hewan)); // Sesuaikan bahasa
                 viewModel.setViewToggleVisible(true);
                 selectedFragment = new HewanFragment();
             } else if (item.getItemId() == R.id.nav_tumbuhan) {
-                viewModel.setPageTitle("List Tumbuhan : Semua Region");
+                viewModel.setPageTitle(getString(R.string.title_tumbuhan)); // Sesuaikan bahasa
                 viewModel.setViewToggleVisible(true);
                 selectedFragment = new TumbuhanFragment();
             }
@@ -102,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // Tampilkan default HANYA saat aplikasi pertama kali dibuka (bukan saat ganti tema)
+        // Tampilkan default HANYA saat aplikasi pertama kali dibuka
         if (savedInstanceState == null) {
-            viewModel.setPageTitle("List Hewan : Semua Region");
+            viewModel.setPageTitle(getString(R.string.title_hewan)); // Sesuaikan bahasa
             viewModel.setViewToggleVisible(true);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HewanFragment()).commit();
