@@ -34,4 +34,12 @@ public interface EndemikDao {
     // Ambil data lengkap Endemik yang ID-nya ada di tabel_favorit
     @Query("SELECT * FROM tabel_endemik WHERE id IN (SELECT endemikId FROM tabel_favorit) ORDER BY nama ASC")
     LiveData<List<Endemik>> getModelFavorit();
+
+    // Hitung jumlah baris data secara sinkron (langsung)
+    @Query("SELECT COUNT(id) FROM tabel_endemik") // Pastikan 'table_endemik' sesuai dengan nama tabel di @Entity kamu
+    int getCountSync();
+
+    // Masukkan banyak data (List) sekaligus
+    @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
+    void insertAll(java.util.List<Endemik> endemikList);
 }

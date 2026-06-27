@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Tambahkan fitsSystemWindows="true" di sini agar tidak tertabrak status bar -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,6 +7,7 @@
     android:fitsSystemWindows="true"
     android:background="?android:attr/windowBackground">
 
+    <!-- HEADER LAYOUT -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -25,15 +25,26 @@
             app:tint="?attr/colorControlNormal" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="16dp"
             android:text="Detail Spesies"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnFavorit"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_love_outline"
+            android:contentDescription="Tombol Favorit"
+            app:tint="?attr/colorControlNormal" />
     </LinearLayout>
 
+    <!-- KONTEN DETAIL -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,22 +62,12 @@
                 android:scaleType="centerCrop"
                 android:background="#E0E0E0" />
 
-            <ImageButton
-                android:id="@+id/btnFavorit"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_love_outline" app:tint="?attr/colorControlNormal"
-                android:contentDescription="Tombol Favorit" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Ubah background dan text color agar seragam dengan Card View -->
                 <TextView
                     android:id="@+id/tvDetailTipe"
                     android:layout_width="wrap_content"
@@ -97,7 +98,6 @@
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
-                <!-- Tambahkan textColorPrimary untuk semua Label/Judul bagian -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +106,6 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold" />
 
-                <!-- Tambahkan textColorSecondary untuk isi dari teks tersebut -->
                 <TextView
                     android:id="@+id/tvDetailStatus"
                     android:layout_width="match_parent"
