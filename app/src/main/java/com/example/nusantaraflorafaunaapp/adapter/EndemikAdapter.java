@@ -91,7 +91,7 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
 
         holder.tvNama.setText(endemik.getNama());
         holder.tvNamaLatin.setText(endemik.getNama_latin());
-        holder.tvTipe.setText(endemik.getTipe());
+        holder.tvAsal.setText(endemik.getAsal());
 
         if (endemik.getFoto() != null && !endemik.getFoto().isEmpty()) {
             Glide.with(context)
@@ -128,14 +128,14 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
     // ViewHolder: Berfungsi mencari dan menyimpan referensi komponen UI
     public static class EndemikViewHolder extends RecyclerView.ViewHolder {
         ImageView ivFoto;
-        TextView tvNama, tvNamaLatin, tvTipe;
+        TextView tvNama, tvNamaLatin, tvAsal;
 
         public EndemikViewHolder(@NonNull View itemView) {
             super(itemView);
             ivFoto = itemView.findViewById(R.id.ivFoto);
             tvNama = itemView.findViewById(R.id.tvNama);
             tvNamaLatin = itemView.findViewById(R.id.tvNamaLatin);
-            tvTipe = itemView.findViewById(R.id.tvTipe);
+            tvAsal = itemView.findViewById(R.id.tvAsal);
         }
     }
 }

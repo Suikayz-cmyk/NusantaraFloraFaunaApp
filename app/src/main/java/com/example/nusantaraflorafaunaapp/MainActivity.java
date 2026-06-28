@@ -73,6 +73,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // --- KLIK JUDUL UNTUK FILTER REGION ---
+        tvPageTitle.setOnClickListener(v -> {
+            // Ambil daftar wilayah dari strings.xml (akan otomatis menyesuaikan bahasa)
+            String[] regions = getResources().getStringArray(R.array.region_array);
+
+            // Munculkan Popup Alert Dialog
+            new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Pilih Wilayah / Region")
+                    .setItems(regions, (dialog, which) -> {
+                        String selectedRegion = regions[which];
+
+                        // 1. Kasih instruksi ke ViewModel untuk memfilter daftar (Fragment otomatis update!)
+                        viewModel.setRegionFilter(selectedRegion);
+
+                        // 2. Ganti teks judul agar sesuai dengan region yang dipilih
+                        String currentTitle = tvPageTitle.getText().toString();
+
+                        // Trik: Potong teks judul lama sebelum tanda ":" lalu sambung dengan region baru
+                        if (currentTitle.contains(":")) {
+                            String baseTitle = currentTitle.substring(0, currentTitle.indexOf(":")).trim();
+                            viewModel.setPageTitle(baseTitle + " : " + selectedRegion);
+                        }
+                    })
+                    .show();
+        });
+        // --------------------------------------
+
         // --- NAVIGASI KLIK ---
         findViewById(R.id.btnSearchHeader).setOnClickListener(v -> {
             // Gunakan getString agar bisa menyesuaikan bahasa

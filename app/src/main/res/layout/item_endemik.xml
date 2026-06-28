@@ -34,24 +34,28 @@
             android:text="Nama Hewan/Tumbuhan"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary" /> <TextView
-        android:id="@+id/tvNamaLatin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama Latin"
-        android:textStyle="italic"
-        android:textColor="?android:attr/textColorSecondary" android:layout_marginTop="4dp" />
+            android:textColor="?android:attr/textColorPrimary" />
 
         <TextView
-            android:id="@+id/tvTipe"
+            android:id="@+id/tvNamaLatin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipe"
+            android:text="Nama Latin"
+            android:textStyle="italic"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvAsal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asal"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
             android:textColor="?android:attr/textColorPrimary"
-            android:background="#33888888" /> </LinearLayout>
+            android:background="#33888888" />
+    </LinearLayout>
 </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
