@@ -9,7 +9,7 @@ public class Favorit {
 
     @PrimaryKey
     @NonNull
-    private String endemikId; // Menyimpan ID dari item endemik yang difavoritkan
+    private String endemikId;
 
     public Favorit(@NonNull String endemikId) {
         this.endemikId = endemikId;

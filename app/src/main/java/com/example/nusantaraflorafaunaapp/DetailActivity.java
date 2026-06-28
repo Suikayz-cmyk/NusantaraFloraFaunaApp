@@ -64,11 +64,9 @@ public class DetailActivity extends AppCompatActivity {
         viewModel.isFavorit(id).observe(this, count -> {
             if (count != null && count > 0) {
                 isFav[0] = true;
-                // UBAH DI SINI: Gunakan ikon love terisi dari folder drawable-mu
                 btnFavorit.setImageResource(R.drawable.ic_favorit);
             } else {
                 isFav[0] = false;
-                // UBAH DI SINI: Gunakan ikon love outline dari folder drawable-mu
                 btnFavorit.setImageResource(R.drawable.ic_love_outline);
             }
         });

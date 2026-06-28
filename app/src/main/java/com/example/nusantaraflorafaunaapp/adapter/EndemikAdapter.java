@@ -33,12 +33,12 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
 
     public void setEndemikList(List<Endemik> list) {
         this.originalList = list;
-        this.filteredList = new ArrayList<>(list); // Copy data asli ke filtered
+        this.filteredList = new ArrayList<>(list);
         notifyDataSetChanged();
     }
     public void setGridMode(boolean isGrid) {
         this.isGridMode = isGrid;
-        notifyDataSetChanged(); // Wajib dipanggil agar layout di-render ulang!
+        notifyDataSetChanged();
     }
 
     @Override
@@ -49,14 +49,12 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
     @NonNull
     @Override
     public EndemikViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Cek viewType untuk menentukan layout mana yang akan di-inflate
         int layoutId;
         if (viewType == VIEW_TYPE_GRID) {
-            layoutId = R.layout.item_endemik_grid; // Layout untuk Grid
+            layoutId = R.layout.item_endemik_grid;
         } else {
-            layoutId = R.layout.item_endemik; // Layout untuk List
+            layoutId = R.layout.item_endemik;
         }
-
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
         return new EndemikViewHolder(view);
     }
@@ -100,12 +98,9 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
                     .into(holder.ivFoto);
         }
 
-        // TAMBAHKAN KODE INI: Aksi ketika satu item (baris) diklik
         holder.itemView.setOnClickListener(v -> {
-            // Intent untuk berpindah dari halaman saat ini ke DetailActivity
             android.content.Intent intent = new android.content.Intent(context, com.example.nusantaraflorafaunaapp.DetailActivity.class);
 
-            // Membawa bekal data ke halaman detail
             intent.putExtra("EXTRA_FOTO", endemik.getFoto());
             intent.putExtra("EXTRA_TIPE", endemik.getTipe());
             intent.putExtra("EXTRA_NAMA", endemik.getNama());
@@ -124,8 +119,6 @@ public class EndemikAdapter extends RecyclerView.Adapter<EndemikAdapter.EndemikV
     public int getItemCount() {
         return filteredList.size();
     }
-
-    // ViewHolder: Berfungsi mencari dan menyimpan referensi komponen UI
     public static class EndemikViewHolder extends RecyclerView.ViewHolder {
         ImageView ivFoto;
         TextView tvNama, tvNamaLatin, tvAsal;

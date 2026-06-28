@@ -45,19 +45,16 @@ public class HewanFragment extends Fragment {
             }
         });
 
-        // Mengambil data KHUSUS HEWAN
         viewModel.getEndemikByTipe("Hewan").observe(getViewLifecycleOwner(), endemikList -> {
             if (endemikList != null) {
                 adapter.setEndemikList(endemikList);
 
-                // Menerapkan filter saat data pertama kali dimuat
                 String currentQuery = viewModel.getSearchQuery().getValue();
                 String currentRegion = viewModel.getRegionFilter().getValue();
                 adapter.filter(currentQuery, currentRegion);
             }
         });
 
-        // Observers untuk Search dan Filter
         viewModel.getSearchQuery().observe(getViewLifecycleOwner(), query -> {
             String currentRegion = viewModel.getRegionFilter().getValue();
             adapter.filter(query, currentRegion);

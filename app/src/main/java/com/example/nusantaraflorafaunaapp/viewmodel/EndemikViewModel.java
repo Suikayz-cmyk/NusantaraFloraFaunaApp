@@ -25,8 +25,6 @@ public class EndemikViewModel extends AndroidViewModel {
         repository = new EndemikRepository(application);
         allEndemik = repository.getAllEndemik();
     }
-
-    // UI (Activity/Fragment) akan memanggil method ini untuk mendapatkan datanya
     public LiveData<List<Endemik>> getAllEndemik() {
         return allEndemik;
     }

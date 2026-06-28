@@ -42,7 +42,6 @@ public class SearchFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(EndemikViewModel.class);
 
-        // Ambil SEMUA spesies untuk bahan pencarian
         viewModel.getAllEndemik().observe(getViewLifecycleOwner(), endemikList -> {
             if (endemikList != null) {
                 adapter.setEndemikList(endemikList);

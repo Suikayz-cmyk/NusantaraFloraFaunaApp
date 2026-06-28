@@ -21,7 +21,7 @@ public class InitDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 1. Cek langsung ke database Room (Berjalan di background thread agar tidak macet)
+        // 1. Cek langsung ke database Room
         Executors.newSingleThreadExecutor().execute(() -> {
             EndemikDatabase db = EndemikDatabase.getInstance(this);
             int count = db.endemikDao().getCountSync();
@@ -43,7 +43,6 @@ public class InitDataActivity extends AppCompatActivity {
         Button btnLanjut = findViewById(R.id.btnLanjutInit);
 
         btnLanjut.setOnClickListener(v -> {
-            // Ubah tampilan tombol saat proses berjalan
             btnLanjut.setEnabled(false);
             btnLanjut.setText("Menarik & Menyimpan Data...");
 
@@ -84,6 +83,6 @@ public class InitDataActivity extends AppCompatActivity {
     private void goToHome() {
         Intent intent = new Intent(InitDataActivity.this, MainActivity.class);
         startActivity(intent);
-        finish(); // Hancurkan activity ini agar tidak bisa di-back
+        finish();
     }
 }

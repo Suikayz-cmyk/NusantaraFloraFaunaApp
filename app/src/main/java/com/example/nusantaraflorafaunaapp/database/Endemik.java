@@ -20,8 +20,6 @@ public class Endemik {
     private String sebaran;
     private String foto;
     private String status;
-
-    // Constructor, Getter, dan Setter sangat wajib untuk Room
     public Endemik(@NonNull String id, String tipe, String nama, String nama_latin,
                    String famili, String genus, String deskripsi, String asal,
                    String sebaran, String foto, String status) {
@@ -37,8 +35,6 @@ public class Endemik {
         this.foto = foto;
         this.status = status;
     }
-
-    // --- Generate Getter and Setter di bawah ini (Gunakan Alt+Insert di Android Studio) ---
     @NonNull
     public String getId() { return id; }
     public void setId(@NonNull String id) { this.id = id; }

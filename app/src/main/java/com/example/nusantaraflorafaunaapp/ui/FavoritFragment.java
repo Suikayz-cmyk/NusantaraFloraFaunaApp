@@ -45,14 +45,12 @@ public class FavoritFragment extends Fragment {
             }
         });
 
-        // Mengambil data khusus yang ada di tabel Favorit
         viewModel.getModelFavorit().observe(getViewLifecycleOwner(), endemikList -> {
             if (endemikList != null) {
                 adapter.setEndemikList(endemikList);
             }
         });
 
-        // Observers untuk Search dan Filter
         viewModel.getSearchQuery().observe(getViewLifecycleOwner(), query -> {
             String currentRegion = viewModel.getRegionFilter().getValue();
             adapter.filter(query, currentRegion);

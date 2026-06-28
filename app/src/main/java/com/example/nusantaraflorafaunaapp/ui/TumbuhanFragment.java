@@ -45,7 +45,6 @@ public class TumbuhanFragment extends Fragment {
             }
         });
 
-        // Mengambil data khusus Tumbuhan
         viewModel.getEndemikByTipe("Tumbuhan").observe(getViewLifecycleOwner(), endemikList -> {
             if (endemikList != null) {
                 adapter.setEndemikList(endemikList);
