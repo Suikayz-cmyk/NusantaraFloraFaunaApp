@@ -15,6 +15,10 @@
     <string name="detail_asal">Asal / Sebaran : </string>
     <string name="detail_deskripsi">Deskripsi : </string>
 
+    <string name="akun_about">Tentang Aplikasi</string>
+    <string name="akun_deskripsi">EndemikID adalah aplikasi ensiklopedia flora dan fauna endemik Nusantara yang dirancang untuk mempermudah pelestarian informasi keanekaragaman hayati Indonesia.
+    </string>
+
     <string-array name="region_array">
         <item>Semua Region</item>
         <item>Sumatera</item>

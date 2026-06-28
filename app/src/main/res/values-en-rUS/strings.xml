@@ -15,6 +15,9 @@
     <string name="detail_asal">Origin / Distribution : </string>
     <string name="detail_deskripsi">Description : </string>
 
+    <string name="akun_about">About Application</string>
+    <string name="akun_deskripsi">EndemicID is an encyclopedia application of endemic flora and fauna in Indonesia designed to facilitate the preservation of information on Indonesia\'s biodiversity </string>
+
     <string-array name="region_array">
         <item>All Regions</item>
         <item>Sumatra</item>
