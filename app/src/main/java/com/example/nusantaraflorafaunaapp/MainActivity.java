@@ -126,12 +126,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        int selectedItemId = bottomNav.getSelectedItemId();
-        if (selectedItemId == R.id.nav_hewan) {
-            viewModel.setPageTitle(getString(R.string.title_hewan));
-        } else if (selectedItemId == R.id.nav_tumbuhan) {
-            viewModel.setPageTitle(getString(R.string.title_tumbuhan));
-        }
+
+        // --- TAMBAHKAN KODE INI SEBAGAI PENGGANTINYA ---
+        findViewById(R.id.fragment_container).post(() -> {
+            Fragment currentFrag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+
+            if (currentFrag instanceof HewanFragment) {
+                viewModel.setPageTitle(getString(R.string.title_hewan));
+            } else if (currentFrag instanceof TumbuhanFragment) {
+                viewModel.setPageTitle(getString(R.string.title_tumbuhan));
+            } else if (currentFrag instanceof FavoritFragment) {
+                viewModel.setPageTitle(getString(R.string.title_favorit));
+            } else if (currentFrag instanceof AkunFragment) {
+                viewModel.setPageTitle(getString(R.string.title_akun));
+            } else if (currentFrag instanceof SearchFragment) {
+                viewModel.setPageTitle(getString(R.string.title_search));
+            }
+        });
+
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             if (item.getItemId() == R.id.nav_hewan) {
