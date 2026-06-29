@@ -28,11 +28,11 @@ Aplikasi ini dibangun menggunakan arsitektur modern Android dengan komponen-komp
 ## Screenshot App
 | Splash Screen & Init Data | Main Screen Grid & List (with filter region) |
 | :---: | :---: |
-| <img width="200" src="https://github.com/user-attachments/assets/ff165248-9648-4acb-8c6b-01177ef52150" /> <img width="200" src="https://github.com/user-attachments/assets/eb89c75a-3e9c-4eea-9c94-e973b9cefc96" /> | <img width="200" src="https://github.com/user-attachments/assets/04c60408-c5c5-4740-9785-9ac112a8b822" /> <img width="200"  src="https://github.com/user-attachments/assets/4fe64f9e-83d5-43a4-b235-6a448ee06d02" />|
+| <img width="150" src="https://github.com/user-attachments/assets/ff165248-9648-4acb-8c6b-01177ef52150" /> <img width="150" src="https://github.com/user-attachments/assets/eb89c75a-3e9c-4eea-9c94-e973b9cefc96" /> | <img width="150" src="https://github.com/user-attachments/assets/04c60408-c5c5-4740-9785-9ac112a8b822" /> <img width="150" src="https://github.com/user-attachments/assets/4fe64f9e-83d5-43a4-b235-6a448ee06d02" />|
 
 | Detail & Search | Favorite & Account |
 | :---: | :---: |
-| <img width="200"  src="https://github.com/user-attachments/assets/7ea9c74f-150a-4ad7-b9b0-84b30948da92" /> <img width="200" src="https://github.com/user-attachments/assets/8205d15e-fe0c-4557-82c5-ed5de7425fb7" /> | <img width="200" src="https://github.com/user-attachments/assets/a7fc7689-c708-43f0-acad-5aee2cffec3e" />  <img width="200" src="https://github.com/user-attachments/assets/93a7cb39-7c32-49b2-9023-06306b89e3c4" />|
+| <img width="150" src="https://github.com/user-attachments/assets/7ea9c74f-150a-4ad7-b9b0-84b30948da92" /> <img width="150" src="https://github.com/user-attachments/assets/8205d15e-fe0c-4557-82c5-ed5de7425fb7" /> | <img width="150" src="https://github.com/user-attachments/assets/a7fc7689-c708-43f0-acad-5aee2cffec3e" /> <img width="150" src="https://github.com/user-attachments/assets/93a7cb39-7c32-49b2-9023-06306b89e3c4" />|
 
 ## Cara Menjalankan
 1. **Clone Repositori**
